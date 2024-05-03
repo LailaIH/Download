@@ -5,16 +5,14 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class JobTitle extends Model
+class Subscription extends Model
 {
     use HasFactory;
-    protected $table = 'job_titles';
-    protected $fillable = [
-         'job', 'description', 'is_online', 'status',
-    ];
 
-    public function users()
-    {
+    protected $table = 'subscriptions';
+    protected $fillable=['type','price','description','is_online','status','duration'];
+
+    public function users(){
         return $this->hasMany(User::class);
     }
 }

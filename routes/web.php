@@ -2,6 +2,10 @@
 
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\UserController;
+use App\Http\Controllers\FileController;
+use App\Http\Controllers\InvoiceController;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -28,3 +32,22 @@ Route::get('/admin', function () {
 Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
+
+
+// Users Routes
+Route::get('/admin-cp/users', [UserController::class, 'index'])->name('users.index');
+Route::get('/admin-cp/users/create', [UserController::class, 'create'])->name('users.create');
+Route::post('/admin-cp/users/store', [UserController::class, 'store'])->name('users.store');
+
+
+// Files Routes
+Route::get('/admin-cp/files', [FileController::class, 'index'])->name('files.index');
+Route::get('/admin-cp/files/create', [FileController::class, 'create'])->name('files.create');
+Route::post('/admin-cp/files/store', [FileController::class, 'store'])->name('files.store');
+
+// Invoices Routes
+Route::get('/admin-cp/invoices', [InvoiceController::class, 'index'])->name('invoices.index');
+Route::get('/admin-cp/invoices/create', [InvoiceController::class, 'create'])->name('invoices.create');
+Route::post('/admin-cp/invoices/store', [InvoiceController::class, 'store'])->name('invoices.store');
+Route::get('/admin-cp/invoices/show/{userId}', [InvoiceController::class, 'show'])->name('invoices.show');

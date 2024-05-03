@@ -5,16 +5,14 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Institu extends Model
+class SocialMediaAccount extends Model
 {
     use HasFactory;
+    protected $table = 'social_media_accounts';
+    protected $fillable=['user_id','social_media_platform','is_online','status'];
 
-    protected $fillable = [
-        'user_id', 'discount', 'code', 'description', 'status', 'is_online',
-    ];
-
-    public function user()
-    {
+    public function user(){
         return $this->belongsTo(User::class);
     }
+
 }

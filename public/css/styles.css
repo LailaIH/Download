@@ -15141,6 +15141,11 @@ body {
 .bg-gradient-primary-to-secondary {
   background-color: #0061f2 !important;
   background-image: linear-gradient(135deg, #0061f2 0%, rgba(105, 0, 199, 0.8) 100%) !important;
+
+}
+.bg-light-gray {
+  background-color: #f2f4f5 !important;
+
 }
 
 .bg-transparent-light {

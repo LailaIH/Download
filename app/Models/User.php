@@ -21,14 +21,9 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
-        'jobTitle_id',
-        'img',
-        'is_admin',
-        'is_ban',
-        'status',
-        'is_deleted',
-        'phone',
-        'city',
+        'job_title_id',
+        'subscription_id',
+        
     ];
 
     /**
@@ -55,18 +50,27 @@ class User extends Authenticatable
         return $this->belongsTo(JobTitle::class);
     }
 
-   /* public function doctor()
+    public function subscription()
     {
-        return $this->hasOne(Doctor::class);
-    }*/
-
-    public function patients()
-    {
-        return $this->hasMany(Patient::class);
+        return $this->belongsTo(Subscription::class);
     }
 
-    public function doctors()
-    {
-        return $this->hasManyThrough(Doctor::class, Patient::class);
+    public function socialMediaAccounts(){
+        return $this->hasMany(SocialMediaAccount::class);
     }
+
+    public function files(){
+        return $this->hasMany(File::class);
+
+    }
+
+    
+    public function invoices(){
+        return $this->hasMany(Invoice::class);
+
+    }
+
+   
+
+    
 }
