@@ -40,7 +40,7 @@
                                         <td style="color: green;">{{$user->email}}</td>
                                         <td>{{$user->jobTitle->job}}</td>
                                         <td>
-                                            <a href="{{route('invoices.show' , $user->id)}}" class="btn btn-primary btn-sm">
+                                            <a href="{{route('invoices.show' , $user->id)}}" class="btn btn-primary btn-xs">
                                                 show invoices
                                             </a>
                                         </td>

@@ -5720,6 +5720,22 @@ textarea.form-control-lg {
   --bs-pagination-border-radius: 0.25rem;
 }
 
+
+
+.redbg {
+  color: white;
+  background: red;
+  font-size: small;
+  border-radius: 25px;
+}
+.greenbg {
+  color: white;
+  background: var(--bs-green);
+  font-size: small;
+  border-radius: 25px;
+}
+
+
 .badge {
   --bs-badge-padding-x: 0.65em;
   --bs-badge-padding-y: 0.35em;
@@ -5738,6 +5754,7 @@ textarea.form-control-lg {
   vertical-align: baseline;
   border-radius: var(--bs-badge-border-radius);
 }
+
 .badge:empty {
   display: none;
 }

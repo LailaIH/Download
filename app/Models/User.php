@@ -23,6 +23,7 @@ class User extends Authenticatable
         'password',
         'job_title_id',
         'subscription_id',
+        'is_online',
         
     ];
 

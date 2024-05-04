@@ -48,6 +48,9 @@
                                                 <th class="text-end" scope="col">Total Invoice</th>
                                                 <th class="text-end" scope="col">Paid</th>
                                                 <th class="text-end" scope="col">Remaining</th>
+                                                <th>Is Online</th>
+                                               
+                                                <th></th>
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -61,23 +64,49 @@
                                                 <td class="text-end fw-bold">${{$invoice->invoice}}</td>
                                                 <td class="text-end fw-bold">${{$invoice->paid_amount}}</td>
                                                 <td class="text-end fw-bold">${{$invoice->remain_amount}}</td>
+                                                <td>
+                                                    <div class="row">
+                                                        <div class="col">
+                                                        <p>
+                                                        <span class="{{ $invoice->is_online ? 'greenbg':'redbg' }} p-1">
+                                                            {{ $invoice->is_online ? 'online' : 'offline' }}
+                                                        </span></p></div>
+                                                        <div class="col">
+                                                        <form method="POST" action="{{ route('invoices.updateStatus', $invoice) }}">
+                                                                    @csrf
+                                                                    @method('PATCH')
+
+                                                                    <button type="submit" class="btn btn-danger btn-xs">Change</button>
+
+                                                                </form> </div></div>
+                                                    </td>
+                                            
+                                                <td>
+                                                    <a href="{{ route('invoices.edit', ['invoiceId'=>$invoice['id']]) }}" class="btn btn-primary btn-xs">Edit</a>
+                                            </td>
                                             </tr>
                                            @endforeach
                                           
                                             <!-- Invoice subtotal-->
                                             <tr>
+                                                <td></td>
+                                                <td></td>
                                                 <td class="text-end pb-0" colspan="3"><div class="text-uppercase small fw-700 text-muted">Subtotal:</div></td>
-                                                <td class="text-end pb-0"><div class="h5 mb-0 fw-700">$,1925.00</div></td>
+                                                <td class="text-end pb-0"><div class="h5 mb-0 fw-700">$00</div></td>
                                             </tr>
                                             <!-- Invoice tax column-->
                                             <tr>
-                                                <td class="text-end pb-0" colspan="3"><div class="text-uppercase small fw-700 text-muted">Tax (7%):</div></td>
-                                                <td class="text-end pb-0"><div class="h5 mb-0 fw-700">$134.75</div></td>
+                                                <td></td>
+                                                <td></td>
+                                                <td class="text-end pb-0" colspan="3"><div class="text-uppercase small fw-700 text-muted">Tax :</div></td>
+                                                <td class="text-end pb-0"><div class="h5 mb-0 fw-700">$00</div></td>
                                             </tr>
                                             <!-- Invoice total-->
                                             <tr>
+                                                <td></td>
+                                                <td></td>
                                                 <td class="text-end pb-0" colspan="3"><div class="text-uppercase small fw-700 text-muted">Total Amount Due:</div></td>
-                                                <td class="text-end pb-0"><div class="h5 mb-0 fw-700 text-green">$2059.75</div></td>
+                                                <td class="text-end pb-0"><div class="h5 mb-0 fw-700 text-green">${{$total}}</div></td>
                                             </tr>
                                         </tbody>
                                     </table>

@@ -1,17 +1,15 @@
 @extends('common')
 @section('content')
 
-
 <div class="container mt-n5">
 
 
-
         <div class="card">
-            <div class="card-header">List Of Files</div>
+            <div class="card-header">List Of Jobs</div>
 
-            @if($files->isEmpty())
+            @if($jobs->isEmpty())
             <div class="card-body">
-                No Files Yet
+                No Jobs yet
             </div>
             @else
                 <div class="card-body">
@@ -24,12 +22,9 @@
                             
                                 <table id="myTable" class="table small-table-text">
                                     <thead>
-                                    <tr style="white-space: nowrap; font-size: 13px;">
-                                    <th>User Name</th>
-                                    <th>File URL</th>
-                                    <th>File Size</th>
-                                    <th>File Type</th>
-                                    <th>Downloading Source</th>
+                                    <tr style="white-space: nowrap; font-size: 14px;">
+                                    <th>Name</th>
+                                    <th>Description</th>
                                     <th>Is Online</th>
                                     <th></th>
                                     <th></th>
@@ -37,24 +32,20 @@
                                     </tr></thead>
 
                                     <tbody>
-                                        @foreach($files as $file)
-                                        <tr style="white-space: nowrap; font-size: 13px;">
+                                        @foreach($jobs as $job)
+                                        <tr>
 
-                                        <td style="color: black;"><b>{{$file->user->name}}</b></td>
-                                        <td>{{$file->file_url}}</td>
-                                        <td style="color: blue;">{{$file->file_size}}</td>
-                                       
-                                        <td style="color: blue;">{{$file->file_type}}</td>
-                                        <td>{{$file->download_source}}</td>
+                                        <td style="color: black;"><b>{{$job->job}}</b></td>
+                                        <td >{{$job->description}}</td>
                                         <td>
                                             <p >
-                                            <span class="{{ $file->is_online ? 'greenbg':'redbg' }} p-1">
-                                                {{ $file->is_online ? 'online' : 'offline' }}
+                                            <span class="{{ $job->is_online ? 'greenbg':'redbg' }} p-1">
+                                                {{ $job->is_online ? 'online' : 'offline' }}
                                             </span></p>
                                         </td>
 
-                                        <td>
-                                            <form method="POST" action="{{ route('files.updateStatus', $file) }}">
+                                            <td>
+                                            <form method="POST" action="{{ route('job_titles.updateStatus', $job) }}">
                                                     @csrf
                                                     @method('PATCH')
 
@@ -62,11 +53,10 @@
 
                                                 </form> 
                                             </td>
-                                            <td>
-                                     <a href="{{route('files.edit',['fileId'=>$file['id'] ])}}" class="btn btn-primary btn-xs">Edit</a>
+                                     <td>
+                                     <a href="{{route('job_titles.edit',['jobId'=>$job['id'] ])}}" class="btn btn-primary btn-xs">Edit</a>
 
                                      </td>
-
                                         </tr>
 
                                             @endforeach

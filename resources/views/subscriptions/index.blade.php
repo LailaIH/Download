@@ -9,9 +9,9 @@
         <div class="card">
             <div class="card-header">List Of Users</div>
 
-            @if($users->isEmpty())
+            @if($subs->isEmpty())
             <div class="card-body">
-                No Users Yet
+                No Subscription methods yet
             </div>
             @else
                 <div class="card-body">
@@ -25,37 +25,34 @@
                                 <table id="myTable" class="table small-table-text">
                                     <thead>
                                     <tr style="white-space: nowrap; font-size: 14px;">
-                                    <th>User Name</th>
-                                    <th>User Email</th>
-                                    <th>Job Title</th>
-                                    <th>Subscription</th>
+                                    <th>Subscription type</th>
+                                    <th>Price</th>
+                                    <th>Description</th>
+                                    <th>Duration</th>
                                     <th>Is Online</th>
                                     <th></th>
                                     <th></th>
+
                                     </tr></thead>
 
                                     <tbody>
-                                        @foreach($users as $user)
+                                        @foreach($subs as $sub)
                                         <tr style="white-space: nowrap; font-size: 14px;">
 
-                                        <td style="color: black;"><b>{{$user->name}}</b></td>
-                                        <td style="color: blue;">{{$user->email}}</td>
-                                        @if($user->job_title_id != null)
-                                        <td style="color: green;">{{$user->JobTitle->job}}</td>
-                                        @else <td>no job title</td>@endif
-                                        @if($user->subscription_id !=null)
-                                        <td>{{$user->subscription->type}} , {{$user->subscription->duration}}</td>
-                                        @else <td>no subscription</td>
-                                        @endif
+                                        <td style="color: black;"><b>{{$sub->type}}</b></td>
+                                        <td style="color: blue;">${{$sub->price}} per {{$sub->duration}}</td>
+                                        <td>{{$sub->description}}</td>
+                                        
+                                        <td style="color: blue;">{{$sub->duration}}</td>
 
                                         <td>
                                             <p >
-                                            <span class="{{ $user->is_online ? 'greenbg':'redbg' }} p-1">
-                                                {{ $user->is_online ? 'online' : 'offline' }}
+                                            <span class="{{ $sub->is_online ? 'greenbg':'redbg' }} p-1">
+                                                {{ $sub->is_online ? 'online' : 'offline' }}
                                             </span></p>
                                         </td>
                                         <td>
-                                            <form method="POST" action="{{ route('users.updateStatus', $user) }}">
+                                            <form method="POST" action="{{ route('subscriptions.updateStatus', $sub) }}">
                                                     @csrf
                                                     @method('PATCH')
 
@@ -64,14 +61,10 @@
                                                 </form> 
                                             </td>
                                             <td>
-                                            <a href="{{ route('users.edit',['userId'=>$user['id']]) }}" class="btn btn-primary btn-xs">Edit</a>
+                                            <a href="{{ route('subscriptions.edit',['subId'=>$sub['id']]) }}" class="btn btn-primary btn-xs">Edit</a>
 
                                             </td>
-
-
-
-
-
+                                     
                                         </tr>
 
                                             @endforeach

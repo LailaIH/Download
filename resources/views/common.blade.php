@@ -13,6 +13,7 @@
     <link rel="icon" type="image/x-icon" href="{{asset('assets/img/favicon.png')}}" />
     <script data-search-pseudo-elements defer src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/js/all.min.js" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/feather-icons/4.29.0/feather.min.js" crossorigin="anonymous"></script>
+
 </head>
 <body class="nav-fixed">
 <nav class="topnav navbar navbar-expand shadow justify-content-between justify-content-sm-start navbar-light bg-white" id="sidenavAccordion">
@@ -22,7 +23,7 @@
     <!-- * * Tip * * You can use text or an image for your navbar brand.-->
     <!-- * * * * * * When using an image, we recommend the SVG format.-->
     <!-- * * * * * * Dimensions: Maximum height: 32px, maximum width: 240px-->
-    <a class="navbar-brand pe-3 ps-4 ps-lg-2" href="index.html">Download Panel</a>
+    <a class="navbar-brand pe-3 ps-4 ps-lg-2" href="/admin">Download Panel</a>
     <!-- Navbar Search Input-->
     <!-- * * Note: * * Visible only on and above the lg breakpoint-->
     <form class="form-inline me-auto d-none d-lg-block me-3">
@@ -173,8 +174,8 @@
                 <h6 class="dropdown-header d-flex align-items-center">
                     <img class="dropdown-user-img" src="{{asset('assets/img/illustrations/profiles/profile-1.png')}}" />
                     <div class="dropdown-user-details">
-                        <div class="dropdown-user-details-name">Valerie Luna</div>
-                        <div class="dropdown-user-details-email">vluna@aol.com</div>
+                        <div class="dropdown-user-details-name">{{auth()->user()->name}}</div>
+                        <div class="dropdown-user-details-email">{{auth()->user()->email}}</div>
                     </div>
                 </h6>
                 <div class="dropdown-divider"></div>
@@ -184,7 +185,10 @@
                 </a>
                 <a class="dropdown-item" href="#!">
                     <div class="dropdown-item-icon"><i data-feather="log-out"></i></div>
-                    Logout
+                    <form action="{{route('logout')}}" method="POST">
+                    @csrf
+                    <button type="submit" class="btn btn-primary btn-sm">Logout</button> 
+                    </form>
                 </a>
             </div>
         </li>
@@ -269,167 +273,55 @@
 
 
                     <a class="nav-link collapsed" href="javascript:void(0);" data-bs-toggle="collapse" data-bs-target="#collapseDashboards3" aria-expanded="false" aria-controls="collapseDashboards3">
-                        <div class="nav-link-icon"><i class="fa-solid fa-people-roof"></i></div>
-                         Employees
+                        <div class="nav-link-icon"><i class="fa-solid fa-bell"></i></div>
+                        Subscriptions
                         <div class="sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
                     </a>
                     <div class="collapse" id="collapseDashboards3" data-bs-parent="#accordionSidenav">
                         <nav class="sidenav-menu-nested nav accordion" id="accordionSidenavPages">
-                            <a class="nav-link" href="dashboard-1.html">
-                                New Employee
+                            <a class="nav-link" href="{{route('subscriptions.create')}}">
+                                New Subscription
                                 <span class="badge bg-primary-soft text-primary ms-auto"><i class="fa-solid fa-plus"></i></span>
                             </a>
-                            <a class="nav-link" href="dashboard-2.html">All Employees</a>
+                            <a class="nav-link" href="{{route('subscriptions.index')}}">All Subscriptions</a>
 
                         </nav>
                     </div>
 
                     <a class="nav-link collapsed" href="javascript:void(0);" data-bs-toggle="collapse" data-bs-target="#collapseDashboards4" aria-expanded="false" aria-controls="collapseDashboards4">
-                        <div class="nav-link-icon"><i class="fa-solid fa-code-branch"></i></div>
-                        Branches
+                        <div class="nav-link-icon"><i class="fa-solid fa-file-signature"></i></div>
+                        Job Titles
                         <div class="sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
                     </a>
                     <div class="collapse" id="collapseDashboards4" data-bs-parent="#accordionSidenav">
                         <nav class="sidenav-menu-nested nav accordion" id="accordionSidenavPages">
-                            <a class="nav-link" href="dashboard-1.html">
-                                New Branch
+                            <a class="nav-link" href="{{route('job_titles.create')}}">
+                                New Job Title
                                 <span class="badge bg-primary-soft text-primary ms-auto"><i class="fa-solid fa-plus"></i></span>
                             </a>
-                            <a class="nav-link" href="dashboard-2.html">All Branches</a>
+                            <a class="nav-link" href="{{route('job_titles.index')}}">All Job Titles</a>
 
                         </nav>
                     </div>
 
-                    <a class="nav-link collapsed" href="javascript:void(0);" data-bs-toggle="collapse" data-bs-target="#collapseDashboards5" aria-expanded="false" aria-controls="collapseDashboards5">
-                        <div class="nav-link-icon"><i class="fa-solid fa-stethoscope"></i></div>
-                        Doctors
-                        <div class="sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
-                    </a>
-                    <div class="collapse" id="collapseDashboards5" data-bs-parent="#accordionSidenav">
-                        <nav class="sidenav-menu-nested nav accordion" id="accordionSidenavPages">
-                            <a class="nav-link" href="dashboard-1.html">
-                                New Doctor
-                                <span class="badge bg-primary-soft text-primary ms-auto"><i class="fa-solid fa-plus"></i></span>
-                            </a>
-                            <a class="nav-link" href="dashboard-2.html">All Doctors</a>
+                    
+                
 
-                        </nav>
-                    </div>
+                    
+                   
+                    
+                        
+                    
+             
+                   
 
-                    <a class="nav-link collapsed" href="javascript:void(0);" data-bs-toggle="collapse" data-bs-target="#collapseDashboards6" aria-expanded="false" aria-controls="collapseDashboards6">
-                        <div class="nav-link-icon"><i class="fa-solid fa-money-bill-wave"></i></div>
-                        Payments Ways
-                        <div class="sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
-                    </a>
-                    <div class="collapse" id="collapseDashboards6" data-bs-parent="#accordionSidenav">
-                        <nav class="sidenav-menu-nested nav accordion" id="accordionSidenavPages">
-                            <a class="nav-link" href="dashboard-1.html">
-                                New Payment
-                                <span class="badge bg-primary-soft text-primary ms-auto"><i class="fa-solid fa-plus"></i></span>
-                            </a>
-                            <a class="nav-link" href="dashboard-2.html">All Payments</a>
-
-                        </nav>
-                    </div>
-
-                    <a class="nav-link collapsed" href="javascript:void(0);" data-bs-toggle="collapse" data-bs-target="#collapseDashboards" aria-expanded="false" aria-controls="collapseDashboards">
-                        <div class="nav-link-icon"><i class="fa-solid fa-file-invoice-dollar"></i></div>
-                        Invoices
-                        <div class="sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
-                    </a>
-                    <div class="collapse" id="collapseDashboards" data-bs-parent="#accordionSidenav">
-                        <nav class="sidenav-menu-nested nav accordion" id="accordionSidenavPages">
-                            <a class="nav-link" href="dashboard-1.html">
-                                New Invoice
-                                <span class="badge bg-primary-soft text-primary ms-auto"><i class="fa-solid fa-plus"></i></span>
-                            </a>
-                            <a class="nav-link" href="dashboard-2.html">All Invoices</a>
-                            <a class="nav-link" href="dashboard-2.html">Canceled Invoices</a>
-
-                        </nav>
-                    </div>
-
-                    <a class="nav-link collapsed" href="javascript:void(0);" data-bs-toggle="collapse" data-bs-target="#collapseDashboards1" aria-expanded="false" aria-controls="collapseDashboards1">
-                        <div class="nav-link-icon"><i class="fa-solid fa-ban"></i></div>
-                        Canceled Invoice Reason
-                        <div class="sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
-                    </a>
-                    <div class="collapse" id="collapseDashboards1" data-bs-parent="#accordionSidenav">
-                        <nav class="sidenav-menu-nested nav accordion" id="accordionSidenavPages">
-                            <a class="nav-link" href="dashboard-1.html">
-                                New Reason
-                                <span class="badge bg-primary-soft text-primary ms-auto"><i class="fa-solid fa-plus"></i></span>
-                            </a>
-                            <a class="nav-link" href="dashboard-2.html">All Reasons</a>
-
-                        </nav>
-                    </div>
-
-                    <a class="nav-link collapsed" href="javascript:void(0);" data-bs-toggle="collapse" data-bs-target="#collapseDashboards7" aria-expanded="false" aria-controls="collapseDashboards7">
-                        <div class="nav-link-icon"><i class="fa-solid fa-building-columns"></i></div>
-                        Institutes
-                        <div class="sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
-                    </a>
-                    <div class="collapse" id="collapseDashboards7" data-bs-parent="#accordionSidenav">
-                        <nav class="sidenav-menu-nested nav accordion" id="accordionSidenavPages">
-                            <a class="nav-link" href="dashboard-1.html">
-                                New Institute
-                                <span class="badge bg-primary-soft text-primary ms-auto"><i class="fa-solid fa-plus"></i></span>
-                            </a>
-                            <a class="nav-link" href="dashboard-2.html">All Institutes</a>
-
-                        </nav>
-                    </div>
-
-                    <a class="nav-link collapsed" href="javascript:void(0);" data-bs-toggle="collapse" data-bs-target="#collapseDashboards8" aria-expanded="false" aria-controls="collapseDashboards8">
-                        <div class="nav-link-icon"><i class="fa-solid fa-layer-group"></i></div>
-                        Analysises Groups
-                        <div class="sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
-                    </a>
-                    <div class="collapse" id="collapseDashboards8" data-bs-parent="#accordionSidenav">
-                        <nav class="sidenav-menu-nested nav accordion" id="accordionSidenavPages">
-                            <a class="nav-link" href="dashboard-1.html">
-                                New Group
-                                <span class="badge bg-primary-soft text-primary ms-auto"><i class="fa-solid fa-plus"></i></span>
-                            </a>
-                            <a class="nav-link" href="dashboard-2.html">All Groups</a>
-
-                        </nav>
-                    </div>
+                     
+                   
 
 
 
-                    <a class="nav-link collapsed" href="javascript:void(0);" data-bs-toggle="collapse" data-bs-target="#collapseDashboards10" aria-expanded="false" aria-controls="collapseDashboards10">
-                        <div class="nav-link-icon"><i class="fa-solid fa-ticket"></i></div>
-                        Copones
-                        <div class="sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
-                    </a>
-                    <div class="collapse" id="collapseDashboards10" data-bs-parent="#accordionSidenav">
-                        <nav class="sidenav-menu-nested nav accordion" id="accordionSidenavPages">
-                            <a class="nav-link" href="dashboard-1.html">
-                                New Copon
-                                <span class="badge bg-primary-soft text-primary ms-auto"><i class="fa-solid fa-plus"></i></span>
-                            </a>
-                            <a class="nav-link" href="dashboard-2.html">All Copones</a>
 
-                        </nav>
-                    </div>
-
-                    <a class="nav-link collapsed" href="javascript:void(0);" data-bs-toggle="collapse" data-bs-target="#collapseDashboards11" aria-expanded="false" aria-controls="collapseDashboards11">
-                        <div class="nav-link-icon"><i class="fa-solid fa-champagne-glasses"></i></div>
-                        Campaigns
-                        <div class="sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
-                    </a>
-                    <div class="collapse" id="collapseDashboards11" data-bs-parent="#accordionSidenav">
-                        <nav class="sidenav-menu-nested nav accordion" id="accordionSidenavPages">
-                            <a class="nav-link" href="dashboard-1.html">
-                                New Campaign
-                                <span class="badge bg-primary-soft text-primary ms-auto"><i class="fa-solid fa-plus"></i></span>
-                            </a>
-                            <a class="nav-link" href="dashboard-2.html">All Campaigns</a>
-
-                        </nav>
-                    </div>
+                
 
 
                     <!-- Sidenav Heading (Custom)-->
@@ -446,12 +338,15 @@
 
             </div>
             <!-- Sidenav Footer-->
-            <div class="sidenav-footer">
-                <div class="sidenav-footer-content">
+            <br><br><br><br><br><br>
+            <div class="mt-15">
+
+            <div class="sidenav-footer ">
+                <div class="sidenav-footer-content ">
                     <div class="sidenav-footer-subtitle">Logged in as:</div>
                     <div class="sidenav-footer-title">Valerie Luna</div>
                 </div>
-            </div>
+            </div></div>
             </div>
         </nav>
 
