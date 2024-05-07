@@ -22,7 +22,7 @@
                             
                                 <table id="myTable" class="table small-table-text">
                                     <thead>
-                                    <tr style="white-space: nowrap; font-size: 14px;">
+                                    <tr style="white-space: nowrap; font-size: 13px;">
                                     <th>Name</th>
                                     <th>Description</th>
                                     <th>Is Online</th>
@@ -33,7 +33,7 @@
 
                                     <tbody>
                                         @foreach($jobs as $job)
-                                        <tr>
+                                        <tr style="white-space: nowrap; font-size: 13px;">
 
                                         <td style="color: black;"><b>{{$job->job}}</b></td>
                                         <td >{{$job->description}}</td>

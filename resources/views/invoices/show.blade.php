@@ -22,7 +22,7 @@
                                 <div class="row justify-content-between align-items-center">
                                     <div class="col-12 col-lg-auto mb-5 mb-lg-0 text-center text-lg-start">
                                         <!-- Invoice branding-->
-                                        <img class="invoice-brand-img rounded-circle mb-4" src="/assets/img/coin.png" alt="" />
+                                        <img class="invoice-brand-img  mb-4" src="/assets/img/money.png" alt="" />
                                         <div class="h2 text-black mb-0">List of {{$user->name}} invoices</div>
                                         
                                     </div>

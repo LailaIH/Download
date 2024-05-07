@@ -40,16 +40,22 @@ class InvoiceController extends Controller
 
         $paid_amount = strip_tags($request->input('paid_amount'));
         $total_invoice = strip_tags($request->input('invoice'));
+        $remain_amount = $total_invoice - $paid_amount;
         $userId = $request->input('user_id');
 
-        $invoice->user_id = $userId;
-        $invoice->invoice = $total_invoice;
-        $invoice->paid_amount = $paid_amount;
         if($paid_amount <= $total_invoice){
+            $invoice->paid_amount = $paid_amount;
             $invoice->remain_amount = $total_invoice - $paid_amount;
+            $invoice->user_id = $userId;
+            $invoice->invoice = $total_invoice;
+            $invoice->save();
+            return true;
 
         }
-        $invoice->save();
+        else{
+            return false;
+        }
+        
     }
 
     // view creation form for a new invoice
@@ -58,16 +64,35 @@ class InvoiceController extends Controller
         return view('invoices.create',['users'=>User::all()]);
     }
 
-    // store a new invoice for a user
+ 
+
     public function store(Request $request){
-       $userId = $request->input('user_id');
+        $request->validate([
+            'user_id'=>'required',
+            'invoice'=>'required',
+            'paid_amount'=>'required',
+        ]);
 
-       $invoice = new Invoice();
-       $this->storeAndUpdate($request,$invoice);
+        $userId = $request->input('user_id');
+        $paid_amount = strip_tags($request->input('paid_amount'));
+        $total_invoice = strip_tags($request->input('invoice'));
 
-        
-        return redirect()->route('invoices.show' , $userId)->with('success','invoice has benn created successfully');
+        if($paid_amount <= $total_invoice){
+            $invoice = new Invoice();
+            $invoice->paid_amount = $paid_amount;
+            $invoice->invoice = $total_invoice;
+            $invoice->remain_amount = $total_invoice - $paid_amount;
+            $invoice->user_id = $userId;
+            
+            $invoice->save();
+            return redirect()->route('invoices.show' , $userId)->with('success','invoice has benn created successfully');
 
+
+        }
+        else{
+         return redirect()->back()->withErrors(['fail' => 'Paid amount should not be greater than the invoice!']);
+
+        }
 
 
     }
@@ -77,16 +102,30 @@ class InvoiceController extends Controller
         return view('invoices.edit',['invoice'=>$invoice , 'users'=>User::all()]);
     }
 
-    public function update(Request $request , $invoiceId){
+    
+
+       public function update(Request $request , $invoiceId){
+        $request->validate([
+            'user_id'=>'required',
+            'invoice'=>'required',
+            'paid_amount'=>'required',
+        ]);
         $userId = $request->input('user_id');
+        $paid_amount = strip_tags($request->input('paid_amount'));
+        $remain_amount = strip_tags($request->input('remain_amount'));
+        $total_invoice = strip_tags($request->input('invoice'));
+
         $invoice = Invoice::findOrFail($invoiceId);
+        $invoice->user_id = $userId;
+        $invoice->invoice = $total_invoice;
+        $invoice->paid_amount = $paid_amount;
+        $invoice->remain_amount = $remain_amount;
+        $invoice->save();
+       return redirect()->route('invoices.show' , $userId)->with('success','invoice has benn updated successfully');
 
-        $invoice->payment_date = $request->input('payment_date');
-        $this->storeAndUpdate($request,$invoice);
-        return redirect()->route('invoices.show' , $userId)->with('success','invoice has benn updated successfully');
 
 
-    }
+       }
 
     public function updateStatus( Invoice $invoice)
     {

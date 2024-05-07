@@ -9,7 +9,11 @@
         <div class="card">
         <div class="card-header">Create A New Invoice</div>
         <div class="card-body">
-
+        @if ($errors->has('fail'))
+                                <div class="alert alert-danger">
+                                    {{ $errors->first('fail') }}
+                                </div>
+                            @endif
 
         <form action="{{ route('invoices.store') }}" method="POST">
                 @csrf

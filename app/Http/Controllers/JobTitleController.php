@@ -45,8 +45,8 @@ class JobTitleController extends Controller
 
     public function edit($jobId){
         $job = JobTitle::findOrFail($jobId);
-        return view('jobs.edit',['job'=>$job]);
-    }
+        return view('jobs.edit' , ['job'=>$job] );
+    } 
 
     public function update(Request $request , $jobId){
         $job = JobTitle::findOrFail($jobId);

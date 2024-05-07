@@ -39,6 +39,9 @@ class UserController extends Controller
             $user->name = $data['name'];
             $user->job_title_id = $data['job_title_id'];
             $user->subscription_id = $request->filled('subscription_id')? $request->input('subscription_id'):null ;
+          
+          
+
             $user->save();
 
     }
@@ -82,6 +85,30 @@ class UserController extends Controller
         $user->update(['is_online' => !$user->is_online]);
 
         return back()->with('success', 'Status updated successfully');
+    }
+
+
+    public function showProfile($userId){
+        return view('users.profile',['user'=>User::findOrFail($userId)]);
+    }
+
+    public function updateProfile(Request $request , $userId){
+         $request->validate([
+            'name' => ['required', 'string', 'max:255'],
+            ]);
+
+        $user = User::findOrFail($userId);
+        $user->name = $request->input('name');
+        if ($request->hasFile('img')) {
+            $image = $request->file('img');
+            $imageName = time().'.'.$image->extension();
+            $image->move(public_path('userImages'), $imageName);
+            $user->img = $imageName;
+        }
+        $user->save();
+
+        return redirect()->route('users.showProfile',$user->id)->with('success','profile has been updated successfully');
+        
     }
 
 

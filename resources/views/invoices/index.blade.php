@@ -24,7 +24,7 @@
                             
                                 <table id="myTable" class="table small-table-text">
                                     <thead>
-                                    <tr style="white-space: nowrap; font-size: 14px;">
+                                    <tr style="white-space: nowrap; font-size: 13px;">
                                     <th>User Name</th>
                                     <th>User Email</th>
                                     <th>User Job Title</th>
@@ -34,7 +34,7 @@
 
                                     <tbody>
                                         @foreach($users as $user)
-                                        <tr>
+                                        <tr style="white-space: nowrap; font-size: 13px;">
 
                                         <td style="color: black;"><b>{{$user->name}}</b></td>
                                         <td style="color: green;">{{$user->email}}</td>

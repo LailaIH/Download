@@ -9,7 +9,11 @@
         <div class="card">
         <div class="card-header">Edit Invoice</div>
         <div class="card-body">
-
+        @if ($errors->has('fail'))
+                                <div class="alert alert-danger">
+                                    {{ $errors->first('fail') }}
+                                </div>
+                            @endif
 
         <form action="{{ route('invoices.update',['invoiceId'=>$invoice['id']]) }}" method="POST">
                 @csrf
@@ -56,6 +60,15 @@
                 @enderror </div>
 
                 <div class="col-md-6">
+
+                    <label for="remain_amount" class="small mb-1"> Remaining Amount </label>
+                        
+                        <input class="form-control" name="remain_amount" id="remain_amount" type="text" required value="{{$invoice->remain_amount}}" />
+                        @error('remain_amount')
+                            {{$message}}
+                        @enderror </div></div>
+
+                <div class="col-12">
                 <label for="payment_date" class="small mb-1"> Payment Date </label>
                 
                 <input class="form-control" name="payment_date" id="payment_date" type="date"  value="{{$invoice->payment_date}}" />
@@ -63,7 +76,7 @@
                     {{$message}}
                 @enderror
                 </div>
-            </div>
+            
 
                 
                 
